@@ -1,0 +1,4 @@
+*/10 * * * * pi cd /home/pi/scripts/blobservatory && python3 blobservatory.py --mode cron --directory /mnt/key/captures/ --awb-mode cloudy --preview 5
+1-59/10 * * * * pi  rclone copy /mnt/key/captures/ gdrive:GDRIVE_FOLDER/
+0 7 * * * pi cd /mnt/key/captures/;  for file in $(ls  *.jpg| head -n $(expr `ls *.jpg | wc -l` - 144 )); do rm $file ; done
+03 7 * * * pi cd /mnt/key/captures/; ffmpeg   -framerate 10   -pattern_type glob   -i '*.jpg'   -vf scale=1024:-1   blob_$(date '+%m-%d-%Y').gif ;
